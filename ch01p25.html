@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ch 01 p 25</title>
+</head>
+<body>
+<script>
+    // `eventLoop` - массив, работающий по принципу очереди
+    // (первым пришел, первым вышел)
+    var eventLoop = [ ];
+    var event;
+    while (true) {   // продолжать "бесконечно"
+        if (eventLoop.length > 0) {   // отработать "квант"
+// получить следующее событие в очереди
+// Этими событиями становятся ваши функции обратного вызова.
+            event = eventLoop.shift();
+            try {
+                event();    // выполнить следующее событие
+            }
+            catch (err) {
+                reportError(err);
+            }
+        }
+    }
+</script>
+</body>
+</html>

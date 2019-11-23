@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ch 01 p 46 </title>
+</head>
+<body>
+<script>  //API для планирования заданий (напрямую, без всяких трюков);
+    function schedule (f) {f();}
+                      //  {setTimeout( f,0);}
+    console.log( "A" );
+    setTimeout( function(){
+        console.log( "B" ); }, 0 );
+    schedule( function(){    // теоретический "API задания"
+        console.log( "C" );
+        schedule( function(){
+            console.log( "D" );
+        } );
+    } );
+</script>
+</body>
+</html>
