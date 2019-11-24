@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ch03 p 115</title>
+</head>
+<body>
+<script>
+
+const foo = {
+    id  : 1,
+//    bar : function() {return this.id; }
+    };
+console.log(foo)
+    fetch( "http://172.24.70.211/wp-json/wp/v2/users" )  // шаг 1:
+        .then( function(response1){  // шаг 2:
+            foo.bar(); // undefined, ошибка!
+            // сюда управление не передается
+            return fetch( "http://172.24.70.211/wp-json/wp/v2/users" + response1 );
+        } )
+        .then(                       // шаг 3:
+            function fulfilled(response2){
+                    // сюда управление не передается
+            },
+            function rejected(err){ // обработчик отказа для перехвата ошибки
+                console.log( err );
+                return 42;         // ошибка `TypeError` из `foo.bar()`
+            }
+        )
+        .then( function(msg){      // шаг 4:
+            console.log( msg ); // 42
+        } );
+</script>
+</body>
+</html>
