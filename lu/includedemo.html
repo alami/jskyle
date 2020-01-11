@@ -4,7 +4,35 @@
     <meta charset="UTF-8">
     <title>include demo</title>
 </head>
-<body>
 
+<body>
+<input type="text" class="u-19__input">
+<button class="u-19__button">funcIncludes</button>
+<div class="out-19"></div>
 </body>
 </html>
+<script>
+    function funcIncludes() {
+        let arr19 = [65, 98, 200, 87]
+        let inp19 = +document.querySelector('.u-19__input').value //+-convert 2number
+        let res = false
+        /*for (c = 0; c < arr19.length; c++) {
+            if (inp19 == arr19[c]) {
+                res = true
+                // document.querySelector('.out-19').innerHTML = true
+                break
+            }
+            // else if (inp19 != arr19[c]) {
+            //     document.querySelector('.out-19').innerHTML = false
+            // }
+        }*/
+        if (arr19.indexOf(inp19) != -1) res = true
+        document.querySelector('.out-19').innerHTML = res
+    }
+
+    document.querySelector('.u-19__button').onclick = funcIncludes
+
+//    --11
+//    WebDev с нуля. Канал Алекса Лущенко
+//    https://www.youtube.com/watch?v=j-yCTcf5T8Q - JavaScript Doctor. Хитрый includes
+</script>
