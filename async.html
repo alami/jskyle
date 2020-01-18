@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>etc</title>
+</head>
+<body>
+<script>
+    /*async function f() {
+        a.f(); return 1;
+    }
+    f().then(alert,alert);*/
+
+
+    async function f() {
+
+        let promise = new Promise((resolve, reject) => {
+            setTimeout(() => resolve("готово!"), 5000)
+        });
+        promise.then(alert)
+        //let result = await promise; // будет ждать, пока промис не выполнится (*)
+        //alert(result); // "готово!"
+    }
+    f();
+
+</script>
+</body>
+</html>
