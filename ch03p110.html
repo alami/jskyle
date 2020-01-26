@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ch03p110</title>
+</head>
+<body>
+<script>
+    var p = Promise.resolve( 21 );
+    p
+        .then( function(v){
+            console.log( v ); // 21
+            return v * 2;    // выполнение сцепленного обещания со значением `42`
+        } )
+        .then( function(v){  // сцепленное обещание p2
+            console.log( v ); // 42
+            return 555
+        } )
+        .then( function(v){  // сцепленное обещание  P3
+            console.log( v ); // 42
+        } );
+</script>
+</body>
+</html>

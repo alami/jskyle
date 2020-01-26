@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ch3p088</title>
+</head>
+<body>
+<script>
+    listener = () => alert("listener done")
+    function foo(x) {    // начать выполнение операции, которая может занять некоторое время
+        return listener; // вернуть объект уведомления для события `listener`
+    }
+    var evt = foo( 42 ); //---возвращение объекта события evt, получающего обратные вызовы.
+    evt.on( "completion", function(){
+        // теперь можно переходить к следующему шагу!
+    } );
+    evt.on( "failure", function(err){
+        // в `foo(..)` что-то пошло не так
+    } );
+</script>
+</body>
+</html>

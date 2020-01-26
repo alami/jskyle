@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ch3p083</title>
+</head>
+<body>
+<script>
+    let fetchX = (x) => setTimeout(x=>x, 5000)
+    let fetchY = (y) => setTimeout(y=>y, 5000)
+
+    function add(xPromise,yPromise) {
+// Promise.all([..]) получает массив обещаний  и возвращает новое
+// обещание, ожидающее завершения всех обещаний в массиве
+        return Promise.all( [xPromise, yPromise] )
+// при разрешении этого обещания можно взять полученные значения `X` и `Y` и просуммировать их.
+            .then( function(values){ //values-массив сообщений из ранее разрешенных обещаний
+                console.log(values)
+                return values[0] + values[1];
+            } );
+    }
+// `fetchX()` и `fetchY()` возвращают обещания для соответствующих значений,
+// которые могут быть готовы сейчас или позднее.
+    add( fetchX(), fetchY() ) // мы получаем обещание для суммы этих двух чисел.
+// теперь сцепленный вызов `then(..)` используется для ожидания момента разрешения возвращенного обещания.
+        .then(           // -может получать две функции:
+            function(sum){ // обработка успешного выполнения
+                console.log("Sum:" + sum ); // так гораздо проще!
+            },
+            function(err) {  // обработка отказа
+                console.error( "Error:" + err ); // облом!
+            }
+        );
+</script>
+</body>
+</html>

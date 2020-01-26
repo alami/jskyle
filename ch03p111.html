@@ -6,29 +6,27 @@
 </head>
 <body>
 <script>
-
-    /*var p = Promise.resolve( 21 );
-    p.then( function(v){
-        console.log( v ); // 21
-        return new Promise( function(resolve,reject){// создать обещание и вернуть его
-            resolve( v * 2 );                        // выполнить со значением `42`
-        } );
-     } )
-     .then( function(v){
-        console.log( v ); // 42
-     } );*/
-
 var p = Promise.resolve( 21 );
 p.then( function(v){
     console.log( v ); // 21
     return new Promise( function(resolve,reject){ // создать обещание для возвращения
         setTimeout( function(){                // ввести асинхронность!
             resolve( v * 2 );      // выполнить со значением `42`
+           }, 2000 );
+        } );
+    } )
+.then( function(v){  // выполняется после 2000-миллисекундной задержки на предыдущем шаге
+    console.log( v ); // 42
+    return new Promise( function(resolve,reject){ // создать обещание для возвращения
+        setTimeout( function(){                // ввести асинхронность!
+            resolve( v * 2 );      // выполнить со значением `42`
         }, 2000 );
     } );
- } )
- .then( function(v){  // выполняется после 2000-миллисекундной задержки на предыдущем шаге
-       console.log( v ); // 42
+} )
+    .then( function(v) {  // выполняется после 2000-миллисекундной задержки на предыдущем шаге
+        return new Promise(function (resolve, reject) { // создать обещание для возвращения
+            setTimeout(() => console.log(v), 2000)
+        });
     } );
 
 </script>
