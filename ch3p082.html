@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ch.3 p.82</title>
+<script>
+    let fetchX = (x) => setTimeout(x=>x, 5000)
+    let fetchY = (y) => setTimeout(y=>y, 5000)
+    function add(getX,getY,cb) {
+        var x, y;
+        getX( function(xVal){
+            x = xVal;
+            if (y != undefined) { // оба значения готовы?
+                cb( x + y ); // вычислить сумму
+            }
+        } );
+        getY( function(yVal){
+            y = yVal;
+            if (x != undefined) { // оба значения готовы?
+                cb( x + y ); // вычислить сумму
+            }
+        } );
+    }
+    // fetchX() и fetchY() - синхронные или асинхронные функции
+    add( fetchX, fetchY, function(sum){
+        console.log( sum ); // все просто, не так ли?
+    } );
+    add(3,4)
+
+</script>
+</head>
+<body>
+
+</body>
+</html>
