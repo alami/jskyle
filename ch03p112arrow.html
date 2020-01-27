@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ch03p112</title>
+</head>
+<body>
+<script>
+delay = (time) => new Promise( (resolve,reject) => setTimeout( resolve, time ) );
+console.log( "step 1 - start ")
+delay( 1000 )    // шаг 1
+    .then( () => {
+        res.innerText += "step 2 (after 1000ms)\n"
+        return delay( 2000 )
+    } )
+    .then( () => res.innerText += "step 3 (after another 2000ms)\n" )
+    .then( () => {
+        res.innerText += "step 4 (next Job)\n"
+        return delay( 5000 )
+    } )
+    .then( () => res.innerText += "step 5 (after another 5000ms)\n" )
+
+</script>
+<div id="res"></div>
+</body>
+</html>

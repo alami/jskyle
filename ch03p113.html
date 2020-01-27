@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ch03p112</title>
+</head>
+<body>
+<script>
+    function request(url) {
+        return new Promise( function(resolve,reject){
+            console.log(url)
+            fetch( url, resolve ); // Обратный вызов `ajax(..)` должен быть функцией `resolve(..)` нашего обещания
+        } ); }
+    request( "https://jsonplaceholder.typicode.com/users" )
+        .then( function(response1){
+            console.log(response1)
+            return request( "https://jsonplaceholder.typicode.com/users" + response1 );
+        } )
+        .then( function(response2){
+            console.log( response2 );
+        } )
+</script>
+</body>
+</html>
