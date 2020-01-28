@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ch03 p 132</title>
+</head>
+<body>
+<script>
+
+    var p1 = function() {
+       return  fetch('http://slowwly.robertomurray.co.uk/delay/5000/url/https://jsonplaceholder.typicode.com/users/1')
+           .then (m=>m.json())
+           .then(x=>x.id)
+           .then(x=>console.log(x))
+    }
+    var p2 = function() {
+       return  fetch('http://slowwly.robertomurray.co.uk/delay/1000/url/https://jsonplaceholder.typicode.com/users/2')
+           .then (m=>m.json())
+           .then(x=>console.log(x.id))
+    }
+    // var p2 =fetch('http://slowwly.robertomurray.co.uk/delay/1000/url/https://jsonplaceholder.typicode.com/users/2')
+//p1().then ((m)=>m.json()).then((x)=>console.log(p1()))
+    Promise.all( [p1,p2] )
+        .then( function(msgs){
+// обе переменные `p1` и `p2` выполняютс и передают свои сообщения
+            return fetch('http://slowwly.robertomurray.co.uk/delay/3000/url/https://jsonplaceholder.typicode.com/users/3')
+                .then ((m)=>m.json())
+                .then(x=>x.id)
+        } )
+        .then( msg=> console.log( msg ));
+
+</script>
+<div id="res"></div>
+</body>
+</html>
