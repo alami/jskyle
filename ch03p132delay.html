@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ch03 p 132 delay</title>
+</head>
+<body>
+<script>
+    delay = time => new Promise( (resolve,reject) => setTimeout( resolve, time, time ) )
+        //.then(function (time){console.log(time); return (time)})
+
+
+    var p1 = delay( 1000 );
+    var p2 = delay( 2000 );
+    // var p1 = Promise.resolve(3);
+    // var p2 = 1337;
+    Promise.all( [p1, p2] )  // обе переменные `p1` и `p2` выполняются и передают свои сообщения
+        .then( () => delay( 3000 ) )
+        .then( msg => console.log( msg ) );
+
+</script>
+<div id="res"></div>
+</body>
+</html>
