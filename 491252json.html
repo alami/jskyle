@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>491252 Json</title>
+
+</head>
+<body>
+<h3>491252 JSON.stringify</h3>
+<div id="n01">n01</div>
+<div id="n02">n02</div>
+<div id="n03">n03</div>
+<div id="n04">n04</div>
+<div id="n05">n05</div>
+<div id="n06">n06</div>
+<div id="n07">n07</div>
+</body>
+<script>
+    function vi(pnt,txt) {
+        document.getElementById(pnt).innerHTML='<p>'+txt+'</p>'
+    }
+    const user = {
+        name: 'Harry Heman',
+        age: 29,
+        job: 'developer'
+    }
+    // преобразуем объект в строку, используя стандартный метод toString()
+    vi('n01',user.toString()); // [object Object]
+    vi('n02',JSON.stringify(user)) // {"name":"Harry Heman","age":29, "job": "developer"}
+
+    let users = [
+        {
+            id: 1,
+            login: 'harry',
+            password: 'qwerty',
+            status: 'admin',
+            access: true
+        },
+        {
+            id: 2,
+            login: 'alice',
+            password: 'qwerty',
+            status: 'user'
+        },
+        {
+            id: 3,
+            login: 'bob',
+            password: 'qwerty',
+            status: 'user'
+        },
+        {
+            id: 4,
+            login: 'john',
+            password: 'qwerty',
+            status: 'user'
+        },
+        {
+            id: 5,
+            login: 'jane',
+            password: 'qwerty',
+            status: 'user'
+        }
+    ]
+    vi('n03',JSON.stringify(users))
+    console.table(users)
+
+    vi('n04',
+        '2 и 3 параметры "JSON.stringify()"<br>'
+        +JSON.stringify(users,['id', 'access'])) //[{"id":1,"access":true},{"id":2},..]
+    console.log(JSON.stringify(user, null, 10))
+    console.log(JSON.stringify(user, null, '-----> '))
+
+    const user1 = {
+        first: 'Harry',
+        last: 'Heman',
+        age: 29,
+        toJSON(){
+            return {
+                full: `${this.first} - ${this.last}`
+            }
+        }
+    }
+    vi('n05',
+        '5. Если у объекта есть св-во "toJSON",то<br> ' +
+        'JSON.stringify() возвращает результат этой функции а не весь объект:<br>'
+        +JSON.stringify(user1));
+
+    vi('n06',
+        'Кроме JSON.stringify() и toJSON(),<br>' +
+        ' существует также метод json(), возвращающий обещание (промис).')
+    const urls = [
+        'https://jsonplaceholder.typicode.com/users',
+        'https://jsonplaceholder.typicode.com/posts',
+        'https://jsonplaceholder.typicode.com/posts/1/comments',
+        'https://jsonplaceholder.typicode.com/albums/1/photos',
+        'https://jsonplaceholder.typicode.com/users/1/albums',
+        'https://jsonplaceholder.typicode.com/users/1/todos',
+        'https://jsonplaceholder.typicode.com/users/1/posts'
+    ]
+    asyncAwaitFetch()
+    async function asyncAwaitFetch(){
+        try {
+            const response = await fetch(urls[0], {mode: 'cors'})
+            const data = await response.json()
+            console.table(data)
+            vi('n07',JSON.stringify(data))
+        } catch (error){
+            console.error(error)
+        } finally {
+            console.log('потрачено')
+        }
+    }
+
+
+
+
+</script>
+</html>
